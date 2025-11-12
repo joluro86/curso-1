@@ -2,9 +2,35 @@
 </style>
 
 <main class="main">
-  <h1>{{ title }}</h1>
-  <p>Felicitaciones tu app esta corriendo...</p>
-  <h3>{{ otro }}</h3>
-</main>
+    <button (click)="setVisible()">
+    {{visible? 'Ocultar':'Mostrar'}}
+  </button>
+  <div *ngIf="visible; else noEnable">
+    <h1>{{ title }}</h1>
+    <p>Felicitaciones tu app esta corriendo...</p>
+  </div>
 
+
+  <table *ngIf="visible">
+    
+    <thead>
+      <tr>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #isEmpty>
+    <div>No existen registros</div>
+  </ng-template>
+
+
+</main>
+<ng-template #noEnable>
+  <h1>Lo sentimos no esta disponible la pagina</h1>
+</ng-template>
 <router-outlet />
